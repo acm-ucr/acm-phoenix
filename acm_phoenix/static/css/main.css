@@ -98,7 +98,7 @@ a[rel=tooltip]:hover {
 }
 
 body {
-    background: white;
+    background: url(/static/img/subtle_dots.png);
 }
 
 #banner {
@@ -182,8 +182,7 @@ body {
 }
 
 #logoImg {
-    width: 110px;
-    height: 98px;
+    width: 520px;
 }
 
 #minimalHeader {
@@ -269,6 +268,9 @@ body {
 .navUnit {
     border-top: 3px solid #f1ab00;
     padding: 15px;
+    box-shadow: 0px 1px 2px;
+    margin-bottom: 15px;
+    background: white;
 }
 
 .navUnit > .nav {
@@ -278,6 +280,8 @@ body {
 .post {
     border-top: 3px solid #f1ab00;
     padding: 15px;
+    box-shadow: 0px 1px 2px;
+    background: white;
 }
 
 .postHeader {
