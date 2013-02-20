@@ -8,9 +8,9 @@ from acm_phoenix.articles.models import Category, Tag
 
 def all_cats():
     """
-    Get all categories.
+    Get all categories in alphabetical order.
     """
-    return Category.query.all()
+    return Category.query.order_by('title').all()
 
 def all_publishers():
     """
