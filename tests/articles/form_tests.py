@@ -1,7 +1,9 @@
 """Tests for form creation and editing."""
 
 from tests import ACMFormTest
+from acm_phoenix.extensions import db
 from acm_phoenix.users.models import User
+from acm_phoenix.users import constants as USER
 from acm_phoenix.articles.models import Post, Category, Tag
 from acm_phoenix.articles.forms import (all_cats, all_publishers, all_tags,
                                         SearchForm)
@@ -11,6 +13,80 @@ class ArticlesFormsTest(ACMFormTest):
     """Unit tests for Articles Forms."""
     __test__ = True
     forms = [SearchForm]
+
+    def test_all_cats(self):
+        """Tests that all_cats() gives all categories in alphabetical order."""
+        cats = all_cats()
+        self.assertEquals(cats, [])
+
+        cats = [Category("Test Cat 1"), Category("Test Cat 3"),
+                Category("Test Cat 0")]
+        for cat in cats:
+            db.session.add(cat)
+        db.session.commit()
+
+        result_cats = all_cats()
+        self.assertNotEqual(result_cats, [])
+        cats.sort(key=lambda cat: cat.title)
+        self.assertEquals(len(result_cats), 3)
+        self.assertEquals(cats, result_cats)
+
+        for cat in cats:
+            db.session.delete(cat)
+        db.session.commit()
+
+    def test_all_publishers(self):
+        """Tests that all_publishers gives all authors in alphabetical order."""
+        authors = all_publishers()
+        self.assertEqual(authors, [])
+
+        users = [User("Test User 0"), User("Test User 1"),
+                 User("Test Author 5"), User("Test Author 1")]
+        for user in users:
+            db.session.add(user)
+        db.session.commit()
+        authors = users[2:]
+
+        # Should still be an empty list since none of the users are authors.
+        result_authors = all_publishers()
+        self.assertEquals(result_authors, [])
+
+        authors[0].role = USER.PUBLISHER
+        authors[1].role = USER.ADMIN
+        for author in authors:
+            db.session.add(author)
+        db.session.commit()
+
+        # Should finally have the admin and publisher
+        result_authors = all_publishers()
+        self.assertNotEqual(result_authors, [])
+        self.assertEquals(len(result_authors), 2)
+        authors.sort(key=lambda user: user.name)
+        self.assertEquals(authors, result_authors)
+
+        for user in users:
+            db.session.delete(user)
+        db.session.commit()
+
+    def test_all_tags(self):
+        """Tests that all_tags() gives all tags in alphabetical order."""
+        tags = all_tags()
+        self.assertEqual(tags, [])
+
+        tags = [Tag("Test tag 3"), Tag("Test tag 0")]
+        for tag in tags:
+            db.session.add(tag)
+        db.session.commit()
+
+        result_tags = all_tags()
+        self.assertNotEqual(result_tags, [])
+        self.assertEquals(len(result_tags), 2)
+        tags.sort(key=lambda tag: tag.name)
+        self.assertEquals(tags, result_tags)
+
+        for tag in tags:
+            db.session.delete(tag)
+        db.session.commit()
 
     def test_necessary_fields_in_form(self):
         """Tests that necessary fields are in forms to be tested."""
