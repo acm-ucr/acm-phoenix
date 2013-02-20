@@ -1,7 +1,5 @@
 from flask import Flask
 from acm_phoenix.extensions import db, admin
-from flask.ext.paginate import Pagination
-from flask.ext.assets import Environment, Bundle
 
 def create_app(config_object, debug=False):
     """Creates a valid acm_phoenix application."""
