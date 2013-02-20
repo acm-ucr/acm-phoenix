@@ -1,6 +1,6 @@
 """Forms that will be used with the Articles models"""
 
-from flask.ext.wtf import (Form, TextField, SelectField, SubmitField, 
+from flask.ext.wtf import (Form, TextField, SelectField, Optional, Required,
                            QuerySelectMultipleField)
 
 from acm_phoenix.users.models import User
@@ -28,13 +28,15 @@ class SearchForm(Form):
     """
     Form used to help Users find articles.
     """
-    query = TextField(u'Search Query')
-    category = QuerySelectMultipleField(u'In Category', query_factory=all_cats)
-    author = QuerySelectMultipleField(u'Authored By',
+    query = TextField(u'Search Query', [Optional()])
+    category = QuerySelectMultipleField(u'In Category', [Optional()],
+                                        query_factory=all_cats)
+    author = QuerySelectMultipleField(u'Authored By', [Optional()],
                                       query_factory=all_publishers)
-    tags = QuerySelectMultipleField(u'With Tags', query_factory=all_tags)
+    tags = QuerySelectMultipleField(u'With Tags', [Optional()],
+                                    query_factory=all_tags)
 
-    order_by = SelectField(u'Order by', default='created',
+    order_by = SelectField(u'Order by', [Required()], default='created',
                            choices=[('created%20DESC', 'Recency'),
                                     ('title', 'Title'),
                                     ('articles_category.slug', 'Category Name'),
