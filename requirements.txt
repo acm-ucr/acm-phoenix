@@ -8,6 +8,7 @@ Flask-Paginate
 Flask-Testing
 Flask-Login
 blinker
+Flask-Assets
 google-api-python-client==1.0
 git+git://github.com/acm-ucr/xhtml2pdf.git#egg=xhtml2pdf
 wepay

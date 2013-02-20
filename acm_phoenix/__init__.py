@@ -1,5 +1,7 @@
 from flask import Flask
 from acm_phoenix.extensions import db, admin
+from flask.ext.paginate import Pagination
+from flask.ext.assets import Environment, Bundle
 
 def create_app(config_object, debug=False):
     """Creates a valid acm_phoenix application."""
@@ -65,7 +67,6 @@ def register_filters(app):
         """A filter that formats a datetime as Month Day, Year."""
         format = '%b %d, %Y'
         return date.strftime(format)
-
     @app.template_filter('format_authors')
     def authors(author_ids):
         """Convert list of author ids into author names."""
