@@ -1,10 +1,11 @@
 """Database Models used by users and other modules"""
 
-from acm_phoenix import db
+from flask.ext.login import UserMixin
+from acm_phoenix.extensions import db
 from acm_phoenix.users import constants as USER
 from datetime import datetime
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     """
     Defines the User object.
     """
@@ -36,8 +37,10 @@ class User(db.Model):
         self.major = major
         self.shirt_size = shirt_size
         self.description = description
+        self.member = False
         self.member_since = datetime.now()
         self.membership_status = USER.IN_PROGRESS
+        self.role = USER.USER
         self.signature = signature
 
     def getRole(self):

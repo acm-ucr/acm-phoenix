@@ -2,7 +2,7 @@
 
 from flask import flash
 
-from acm_phoenix import app, db
+from acm_phoenix.extensions import db
 from acm_phoenix.users.models import User
 from acm_phoenix.users.gfm import gfm
 
@@ -26,9 +26,9 @@ class Category(db.Model):
     title = db.Column(db.String(120))
     slug = db.Column(db.String)
 
-    def __init__(self, title=None, slug=None):
+    def __init__(self, title='', slug=None):
         self.title = title
-        self.slug = slug
+        self.slug = slugify(title)
 
     def __unicode__(self):
         return self.title
@@ -47,7 +47,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30))
 
-    def __init__(self, tagname=None):
+    def __init__(self, tagname=''):
         self.name = tagname
 
     def __unicode__(self):
@@ -78,14 +78,13 @@ class Post(db.Model):
                              backref=db.backref('posters', lazy='dynamic'),
                              order_by=User.name)
 
-    def __init__(self, title=None, gfm_content=None, created=None, tags=None,
+    def __init__(self, title='', gfm_content='', created=None, tags=[],
                  slug=None, category=None, author=None):
-        self.title = title or ""
-        self.gfm_content = gfm_content or ""
-        self.created = datetime.now()
-        print self.created
-        self.tags = tags or []
-        self.slug = slug or ""
+        self.title = title
+        self.gfm_content = gfm(gfm_content)
+        self.created = created or datetime.now()
+        self.tags = tags
+        self.slug = slugify(title)
         self.category = category
         self.author = author
 
