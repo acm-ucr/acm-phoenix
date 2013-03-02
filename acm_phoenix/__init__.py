@@ -135,3 +135,7 @@ def register_filters(app):
             return ''
         else:
             return 'Ordered by ' + ORDER[order]
+
+if __name__ == '__main__':
+    app = create_app('config.Config')
+    app.run()
