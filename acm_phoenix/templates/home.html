@@ -44,7 +44,7 @@
 	  <ul id="cats" class="nav">
 	    {% for cat in cats %}
 	      <li>
-		<a href="/articles/cat/{{ cat }}">{{ cat | title }}</a>
+		<a href="/articles/cat/{{ cat | lower }}">{{ cat | title }}</a>
 	      </li>
 	    {% endfor %}
 	  </ul>

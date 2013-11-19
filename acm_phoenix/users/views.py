@@ -137,12 +137,12 @@ def register():
     if raw_signature.find("data:image") == -1:
       from signpad2image import s2i
 
+      image_path = os.path.join(os.path.dirname(__file__),
+                                '../static/packages/signpad2image/signpad2image/')
       PIL_image = s2i(
         raw_signature,
-        input_image=os.path.abspath('acm_phoenix/static/packages/signpad2image'
-                                    '/signpad2image/blanksig.png'),
-        nosig_image=os.path.abspath('acm_phoenix/static/packages/signpad2image'
-                                    '/signpad2image/nosig.png'))
+        input_image=os.path.join(image_path, 'blanksig.png'),
+        nosig_image=os.path.join(image_path, 'nosig.png'))
 
       output =  StringIO.StringIO()
       PIL_image.save(output, format='PNG')

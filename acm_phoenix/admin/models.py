@@ -52,7 +52,9 @@ class UserAdmin(ModelView):
         role=lambda m, p: USER.ROLE[m.role].title(),
         membership_status=(lambda m,p: 
                            USER.MEMBER_STATUS[m.membership_status].title()),
-        member_since=lambda m, p: m.member_since.strftime("%b %d, %Y"),
+        member_since=(lambda m, p: m.member_since.strftime("%b %d, %Y")
+                      if m.member_since is not None
+                      else "Not a member"),
         membership_paid_on=(lambda m, p: 
                             m.membership_paid_on.strftime("%b %d, %Y") 
                             if m.membership_paid_on is not None 
@@ -82,7 +84,8 @@ class UserAdmin(ModelView):
     def __init__(self, session, **kwargs):
         # Just call parent class with predefined model.
         super(UserAdmin, self).__init__(User, session, name="user", 
-                                        endpoint="usertools", **kwargs)
+                                        endpoint="usertools", url='usertools',
+                                        **kwargs)
 
 class PostAdmin(ModelView):
     """
@@ -171,7 +174,9 @@ class ReportAdmin(ModelView):
         role=lambda m, p: USER.ROLE[m.role].title(),
         membership_status=(lambda m, p: 
                            USER.MEMBER_STATUS[m.membership_status].title()),
-        member_since=lambda m, p: m.member_since.strftime("%b %d, %Y"),
+        member_since=(lambda m, p: m.member_since.strftime("%b %d, %Y")
+                      if m.member_since is not None
+                      else "Not currently a member"),
         membership_paid_on=(lambda m, p: 
                             m.membership_paid_on.strftime("%b %d, %Y")
                             if m.membership_paid_on is not None
