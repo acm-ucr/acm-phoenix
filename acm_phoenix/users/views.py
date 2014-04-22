@@ -242,7 +242,7 @@ def verify_credentials_and_login(credentials):
   email = id_token['email']
   verified_email = id_token['verified_email']
 
-  if verified_email == 'true':
+  if verified_email:
     # Find user with this email
     user = User.query.filter_by(email=email).first()
     if user is None:
