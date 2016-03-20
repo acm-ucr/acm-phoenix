@@ -401,7 +401,7 @@ class UserViewTest(ACMTestCase):
         self.assertEqual(response.location, url_for('users.home'))
 
         # User should now be logged into session.
-        self.assertTrue(current_user.is_authenticated())
+        self.assertTrue(current_user.is_authenticated)
 
         # current_user's id should match user's id.
         user = User.query.filter_by(email='testu001@ucr.edu').first()

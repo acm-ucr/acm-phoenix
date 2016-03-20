@@ -77,7 +77,7 @@ def login(flow):
   if session['next_path'] is None:
     session['next_path'] = url_for('users.home')
 
-  if current_user.is_authenticated():
+  if current_user.is_authenticated:
     return redirect(session['next_path'])
   else:
     auth_uri = flow.step1_get_authorize_url()
@@ -270,7 +270,7 @@ def view_profile(user_netid):
   """
   user = User.query.filter_by(netid=user_netid).first()
   #If the user clicked is the user himself, display his profile home
-  if user == current_user and current_user.is_authenticated():
+  if user == current_user and current_user.is_authenticated:
     return render_template('users/profile.html', user=current_user)
   #Otherwise, display the profile page for other users
   elif user is not None:

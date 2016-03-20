@@ -32,11 +32,13 @@ class RegisterForm(Form):
 
     shirt_size = SelectField(
         u'T-Shirt Size', [Required()],
-        choices=[('S', 'Small'),
+        choices=[('XS', 'X-Small'),
+                 ('S', 'Small'),
                  ('M', 'Medium'),
                  ('L', 'Large'),
                  ('XL', 'X-Large'),
-                 ('XXL', '2X-Large')]
+                 ('XXL', '2X-Large'),
+                 ('XXXL', '3X-Large')]
         )
 
     description = TextAreaField(u'Describe yourself! '
@@ -76,11 +78,13 @@ class EditForm(Form):
 
     shirt_size = SelectField(
         u'T-Shirt Size', [Required()],
-        choices=[('S', 'Small'),
+        choices=[('XS', 'X-Small'),
+                 ('S', 'Small'),
                  ('M', 'Medium'),
                  ('L', 'Large'),
                  ('XL', 'X-Large'),
-                 ('XXL', '2X-Large')]        
+                 ('XXL', '2X-Large'),
+                 ('XXXL', '3X-Large')]
         )
 
     description = TextAreaField(u'Describe yourself! '

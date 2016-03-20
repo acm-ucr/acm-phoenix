@@ -33,7 +33,7 @@ class AdminView(AdminIndexView):
 
     def is_accessible(self):
         # Only accessible to those with at least a publisher role.
-        return current_user.is_authenticated() and current_user.isPublisher()
+        return current_user.is_authenticated and current_user.isPublisher()
 
 
 class UserAdmin(ModelView):
@@ -79,7 +79,7 @@ class UserAdmin(ModelView):
         Override of default ModelView is_accessible method.
         """
         # Only accessible to those with an admin role.
-        return current_user.is_authenticated() and current_user.isAdmin()
+        return current_user.is_authenticated and current_user.isAdmin()
 
     def __init__(self, session, **kwargs):
         # Just call parent class with predefined model.
@@ -117,7 +117,7 @@ class PostAdmin(ModelView):
     def is_accessible(self):
         """Override of default ModelView is_accessible."""
         # Only accessible to those with a publisher role.
-        return current_user.is_authenticated() and current_user.isPublisher()
+        return current_user.is_authenticated and current_user.isPublisher()
 
 class CategoryAdmin(ModelView):
     """
@@ -133,7 +133,7 @@ class CategoryAdmin(ModelView):
     def is_accessible(self):
         """Override of default ModelView is_accessible."""
         # Only accessible to those with a publisher role.
-        return current_user.is_authenticated() and current_user.isPublisher()
+        return current_user.is_authenticated and current_user.isPublisher()
 
 class TagAdmin(ModelView):
     """
@@ -149,7 +149,7 @@ class TagAdmin(ModelView):
     def is_accessible(self):
         """Override of default ModelView is_accessible."""
         # Only accessible to those with a publisher role.
-        return current_user.is_authenticated() and current_user.isPublisher()
+        return current_user.is_authenticated and current_user.isPublisher()
 
 
 class ReportAdmin(ModelView):
@@ -186,7 +186,7 @@ class ReportAdmin(ModelView):
     def is_accessible(self):
         """Override of default ModelView is_accessible."""
         # Only accessible to those with an admin role.
-        return current_user.is_authenticated() and current_user.isAdmin()
+        return current_user.is_authenticated and current_user.isAdmin()
 
     def __init__(self, session, **kwargs):
         super(ReportAdmin, self).__init__(User, session, name="report",
