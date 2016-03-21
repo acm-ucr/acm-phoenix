@@ -2,6 +2,7 @@ from flask.ext.wtf import Form
 from flask.ext.testing import TestCase, Twill
 from wtforms.validators import Optional, Required, Email
 from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField
+from sqlalchemy import text
 
 from acm_phoenix import create_app
 from acm_phoenix.extensions import db
@@ -125,7 +126,7 @@ class ACMFormTest(ACMTestCase):
         decide whether or not to turn CSRF tokens off by the test configuration,
         but we want to make sure."""
         for formClass in self.forms:
-            form = formClass()
+            form = formClass(csrf_enabled=False)
             self.assertFalse(form.csrf_enabled)
 
     def test_create_form_from_ctor(self):

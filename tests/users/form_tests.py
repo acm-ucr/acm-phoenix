@@ -4,8 +4,7 @@ from tests import ACMFormTest
 from acm_phoenix.users.models import User
 from acm_phoenix.users import constants as USER
 from acm_phoenix.users.forms import RegisterForm, EditForm
-from flask.ext.wtf import (TextField, SelectField, 
-                           TextAreaField)
+from wtforms import TextField, SelectField, TextAreaField
 
 class UserFormsTest(ACMFormTest):
     """Unit tests for User Forms."""
@@ -51,11 +50,13 @@ class UserFormsTest(ACMFormTest):
                          ('BI', 'BI (Business Informatics)'),
                          ('Other', 'Other')]
 
-        shirt_size_choices = [('S', 'Small'),
+        shirt_size_choices = [('XS', 'X-Small'),
+                              ('S', 'Small'),
                               ('M', 'Medium'),
                               ('L', 'Large'),
                               ('XL', 'X-Large'),
-                              ('XXL', '2X-Large')]
+                              ('XXL', '2X-Large'),
+                              ('XXXL', '3X-Large')]
 
         for formClass in self.forms:
             form = formClass()

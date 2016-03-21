@@ -56,4 +56,5 @@ class TestingConfig(DevelopmentConfig):
     DEBUG = False
     TESTING = True
     CSRF_ENABLED = False
+    WTF_CSRF_CHECK_DEFAULT = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'tests/test.db')

@@ -1,7 +1,7 @@
 from flask import (Blueprint, request, render_template, flash, g, session,
                    redirect, url_for, current_app)
 from flask.ext.paginate import Pagination
-from sqlalchemy import or_, and_
+from sqlalchemy import or_, and_, text
 
 from acm_phoenix.extensions import db
 from acm_phoenix.users.models import User
@@ -44,7 +44,7 @@ def show_all():
 
     # If there is no request, list posts by recency
     if len(request.args) == 0:
-        posts = Post.query.order_by('created DESC').all()
+        posts = Post.query.order_by(text("created DESC")).all()
     else:
         # Otherwise, get posts that fit requests
         search_term = "%" + (request.args.get('q') or "") + "%"
@@ -78,7 +78,7 @@ def show_all():
                     else ([tag.id for tag in Tag.query.all()]))
         tags = Post.tags.any(Tag.id.in_(tag_list))
 
-        order = request.args.get('order') or 'created DESC'
+        order = request.args.get('order') or text("created DESC")
 
         """
         To be clear, this query looks for anything like the search term

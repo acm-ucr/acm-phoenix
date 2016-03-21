@@ -7,7 +7,9 @@ from acm_phoenix.users import constants as USER
 from acm_phoenix.articles.models import Post, Category, Tag
 from acm_phoenix.articles.forms import (all_cats, all_publishers, all_tags,
                                         SearchForm)
-from flask.ext.wtf import (TextField, SelectField, QuerySelectMultipleField)
+from wtforms import TextField, SelectField
+from wtforms.validators import Optional, Required
+from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField
 
 class ArticlesFormsTest(ACMFormTest):
     """Unit tests for Articles Forms."""

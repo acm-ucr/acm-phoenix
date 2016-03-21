@@ -6,6 +6,7 @@ from flask.ext.paginate import Pagination
 from time import strftime
 
 from acm_phoenix.users.models import User
+from sqlalchemy import text
 
 mod = Blueprint('index', __name__, url_prefix='')
 
@@ -23,13 +24,13 @@ def show_home():
     form = SearchForm()
     
     frontpage_filter = Post.query.filter(Tag.name == "frontpage")
-    posts = frontpage_filter.order_by("created DESC").all()
+    posts = frontpage_filter.order_by(text("created DESC")).all()
 
     cats = Category.query.all()
     tags = Tag.query.all()
 
     author_filter = User.query.filter(User.role < 2)
-    authors = author_filter.order_by("name ASC").all()
+    authors = author_filter.order_by(text("name ASC")).all()
 
     page = int(request.args.get('page')) if request.args.get('page') else 1
     pagination = Pagination(posts, per_page=4, total=len(posts),
