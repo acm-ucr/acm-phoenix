@@ -15,3 +15,7 @@ git+git://github.com/acm-ucr/xhtml2pdf.git#egg=xhtml2pdf
 wepay
 git+git://github.com/acm-ucr/python-signpad2image.git#egg=python-signpad2image
 nose
+twill
+lxml
+requests
+cssselect
