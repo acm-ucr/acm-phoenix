@@ -2,7 +2,7 @@
 
 from flask import render_template, send_file, redirect, url_for
 from flask.ext.login import current_user
-from flask.ext.admin.contrib.sqlamodel import ModelView
+from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin import expose
 from flask.ext.admin.base import AdminIndexView
 from flask.ext.admin.actions import action
@@ -41,14 +41,14 @@ class UserAdmin(ModelView):
     A modification on ModelView that removes extraneous columns like 
     Description, WePay Verification Key, and Signature
     """
-    excluded_list_columns = ['description', 'wepay_verification',
+    column_exclude_list = ['description', 'wepay_verification',
                              'signature', 'wepay_checkout_id']
 
     # Only text based columns are searchable anyways.
-    searchable_columns = (User.name, User.email, User.netid, User.standing,
+    column_searchable_list = (User.name, User.email, User.netid, User.standing,
                           User.major)
 
-    list_formatters = dict(
+    column_formatters = dict(
         role=lambda m, p: USER.ROLE[m.role].title(),
         membership_status=(lambda m,p: 
                            USER.MEMBER_STATUS[m.membership_status].title()),
@@ -91,20 +91,20 @@ class PostAdmin(ModelView):
     """
     A modification on ModelView that adds article administration.
     """
-    excluded_list_columns = ['gfm_content']
+    column_exclude_list = ['gfm_content']
 
-    sortable_columns = (('category', Category.slug),
+    column_sortable_list = (('category', Category.slug),
                         ('author', User.name), 'title', 'created', 'slug')
 
-    searchable_columns = (User.name,)
+    column_searchable_list = (User.name,)
 
-    list_formatters = dict(category=lambda m, p: m.category.slug,
+    column_formatters = dict(category=lambda m, p: m.category.slug,
                            author=lambda m, p: m.author.name,
                            created=lambda m, p: m.created.strftime("%b %d, %Y"),
                            slug=lambda m, p: m.slug.lower())
 
     form_overrides = dict(gfm_content=TextAreaField)
-    excluded_form_columns = ('created')
+    form_excluded_columns = ('created')
 
     create_template = 'admin/posts/edit.html'
     edit_template = 'admin/posts/edit.html'
@@ -123,7 +123,7 @@ class CategoryAdmin(ModelView):
     """
     A modification on ModelView that adds category administration.
     """
-    searchable_columns = (Category.title, Category.slug)
+    column_searchable_list = (Category.title, Category.slug)
 
     def __init__(self, session, **kwargs):
         super(CategoryAdmin, self).__init__(
@@ -139,7 +139,7 @@ class TagAdmin(ModelView):
     """
     A modification on ModelView that adds category administration.
     """
-    searchable_columns = (Tag.name,)
+    column_searchable_list = (Tag.name,)
 
     def __init__(self, session, **kwargs):
         super(TagAdmin, self).__init__(
@@ -157,9 +157,9 @@ class ReportAdmin(ModelView):
     A modification on ModelView that adds report-creating options like
     generating paper copies of membership information.
     """
-    excluded_list_columns = ['description', 'wepay_verification', 'signature',
+    column_exclude_list = ['description', 'wepay_verification', 'signature',
                              'role', 'membership_status', 'wepay_checkout_id']
-    searchable_columns = (User.name, User.email, User.netid, User.standing,
+    column_searchable_list = (User.name, User.email, User.netid, User.standing,
                           User.major)
 
     # This view is for reports only so nothing is editable or creatable.
@@ -170,7 +170,7 @@ class ReportAdmin(ModelView):
     # Some impossible page size
     page_size = 1000
 
-    list_formatters = dict(
+    column_formatters = dict(
         role=lambda m, p: USER.ROLE[m.role].title(),
         membership_status=(lambda m, p: 
                            USER.MEMBER_STATUS[m.membership_status].title()),

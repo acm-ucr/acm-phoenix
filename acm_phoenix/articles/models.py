@@ -24,7 +24,7 @@ class Category(db.Model):
     __tablename__ = 'articles_category'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120))
-    slug = db.Column(db.String)
+    slug = db.Column(db.Text)
 
     def __init__(self, title='', slug=None):
         self.title = title
@@ -61,13 +61,13 @@ class Post(db.Model):
     __tablename__ = 'articles_posts'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60))
-    gfm_content = db.Column(db.String)
+    gfm_content = db.Column(db.Text)
     created = db.Column(db.DateTime)
     tags = db.relationship('Tag', secondary=tags,
                            primaryjoin=(id == tags.c.post_id),
                            secondaryjoin=(Tag.id == tags.c.tag_id),
                            backref=db.backref('tags', lazy='dynamic'))
-    slug = db.Column(db.String)
+    slug = db.Column(db.Text)
     category_id = db.Column(db.Integer, db.ForeignKey('articles_category.id'))
     category = db.relationship('Category', 
                                primaryjoin=(category_id == Category.id),

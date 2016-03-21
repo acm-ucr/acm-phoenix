@@ -1,7 +1,9 @@
 """Forms that will be used with the Articles models"""
-
-from flask.ext.wtf import (Form, TextField, SelectField, Optional, Required,
-                           QuerySelectMultipleField)
+                           
+from flask.ext.wtf import Form
+from wtforms import TextField, SelectField
+from wtforms.validators import Optional, Required
+from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField
 
 from acm_phoenix.users.models import User
 from acm_phoenix.articles.models import Category, Tag
