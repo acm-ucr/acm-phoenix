@@ -29,3 +29,6 @@ pip-log.txt
 run.py
 config.py
 .db
+
+#Config Variables
+secrets.py

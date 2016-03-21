@@ -5,6 +5,7 @@ Note: Unless you are working on the server itself, you will not be able to run
 it with a Config object. You must use a DevelopmentConfig or TestConfig.
 """
 import os
+from secrets import MYSQL_DB, SECRET_KEY_VAR, CSRF_SESSION_KEY_VAR, RECAPTCHA_PUBLIC_KEY_VAR, RECAPTCHA_PRIVATE_KEY_VAR, GOOGLE_CLIENT_ID_VAR, GOOGLE_CLIENT_SECRET_VAR, WEPAY_ACC_TOK_VAR
 _basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
@@ -13,7 +14,7 @@ class Config(object):
 
     ADMINS = frozenset(['acm.at.ucr+webmaster@gmail.com'])
 
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'acm_phoenix.db')
+    SQLALCHEMY_DATABASE_URI = MYSQL_DB
     DATABASE_CONNECT_OPTIONS = {}
 
     THREADS_PER_PAGE = 8
@@ -36,19 +37,19 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SECRET_KEY = 'MIIEpAIBAAKCAQEAwTs9CBbomFmsYmYzChcAT6FYm6szVtW2wlYaPRajiV7XvFaoZfBpDKDy2xsTaWkWdspR2juyyoVStJSuzLt7pIP7SX6ibDkbKtSthZJA5JAqhtvVF2BtR+yApLoM9hWEF4XQZDswMAGgYOBi+/C5FSqW/jPKoSaO+6dVgf+VKS9Nmp9G'
+    SECRET_KEY = SECRET_KEY_VAR
 
-    CSRF_SESSION_KEY="TNSDOSJBjVSszvLMelsRafiw/z/flEnxh2LeZYMXuiSXxCAm32h9d6hkZpJRbE7Lpbk46sJmNLqRzCVInBOezAwOzR3Dv0FHx2s9kwIDAQABAoIBACB3Fnr8dlnafycNKrggQzId1qhY7EhDofAmzUPEQPe8kpyXJrXx3YR8qjD77JgCSv7sYTI8Y365RbsHXBMT0ONENX0UpK9wLMtWbk0J1JNSUYLU/olt7w5tgvOqOrFBzi6xkeC1PR"
-    RECAPTCHA_PUBLIC_KEY = '6LfDW9YSAAAAAAjSp9n2mS7G1bMwrYH7EESVOLQe'
-    RECAPTCHA_PRIVATE_KEY = '6LfDW9YSAAAAAIJTT53vTrOzG5NdPhetB6Z8JLao'
+    CSRF_SESSION_KEY = CSRF_SESSION_KEY_VAR
+    RECAPTCHA_PUBLIC_KEY = RECAPTCHA_PUBLIC_KEY_VAR
+    RECAPTCHA_PRIVATE_KEY = RECAPTCHA_PRIVATE_KEY_VAR
 
-    GOOGLE_CLIENT_ID = '401399822645-a1015kkb76m6evpn3mhk3hr4voqejt2f.apps.googleusercontent.com'
-    GOOGLE_CLIENT_SECRET = 'TS6HarpynHCdSTesaRMlbaU_'
+    GOOGLE_CLIENT_ID = GOOGLE_CLIENT_ID_VAR
+    GOOGLE_CLIENT_SECRET = GOOGLE_CLIENT_SECRET_VAR
 
     HOST_URL = 'http://localhost:5000'
 
     WEPAY_ACCT_ID = 319493
-    WEPAY_ACC_TOK = '6dd6802f8ebef4992308a0e4f7698c275781ac36854f9451127115d995d8cda7'
+    WEPAY_ACC_TOK = WEPAY_ACC_TOK_VAR
     WEPAY_IN_PROD = False
 
 class TestingConfig(DevelopmentConfig):
