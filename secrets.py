@@ -7,12 +7,12 @@ Present WebMaster:
 Kyle Minshall
 kmins002@ucr.edu
 """
-MYSQL_DB = '' #MySQL DB URL goes here
-SECRET_KEY_VAR = '' #Secret Key variable goes here
-CSRF_SESSION_KEY_VAR = '' #CSRF Session Key goes here
-RECAPTCHA_PUBLIC_KEY_VAR = '' #reCAPTCHA Public Key goes here
-RECAPTCHA_PRIVATE_KEY_VAR = '' #reCAPTCHA Private key goes here
-GOOGLE_CLIENT_ID_VAR = '' #Google Client ID goes here
-GOOGLE_CLIENT_SECRET_VAR = '' #Google Client Secret Key goes here
-WEPAY_ACC_TOK_VAR = '' #WePay Account Token goes here
+MYSQL_DB = 'sqlite://' #MySQL DB URL goes here
+SECRET_KEY_VAR = '1234' #Secret Key variable goes here
+CSRF_SESSION_KEY_VAR = '1234' #CSRF Session Key goes here
+RECAPTCHA_PUBLIC_KEY_VAR = '1234' #reCAPTCHA Public Key goes here
+RECAPTCHA_PRIVATE_KEY_VAR = '1234' #reCAPTCHA Private key goes here
+GOOGLE_CLIENT_ID_VAR = '1234' #Google Client ID goes here
+GOOGLE_CLIENT_SECRET_VAR = '1234' #Google Client Secret Key goes here
+WEPAY_ACC_TOK_VAR = '1234' #WePay Account Token goes here
 
