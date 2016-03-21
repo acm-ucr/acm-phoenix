@@ -7,4 +7,4 @@ install:
   - pip install -q Flask==$FLASK --use-mirrors
   - ./configure
 script:
-  - nosetests
+  - nosetests --verbosity=3 -x .
