@@ -182,7 +182,10 @@ body {
 }
 
 #logoImg {
-    width: 520px;
+    width: 30vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #minimalHeader {

@@ -118,13 +118,18 @@ def show_cat(slug):
     Show all posts under a certain category
     """
     cat = Category.query.filter_by(slug=slug).first()
-    return redirect(url_for('articles.show_all') + '?c=' + str(cat.id))
+    if cat is None:
+        return redirect(url_for('articles.show_all'))
+    else:
+        return redirect(url_for('articles.show_all') + '?c=' + str(cat.id))
 
 @mod.route('/tag/<name>/')
 def show_tag(name):
     """
     Show all posts under a certain tag name
     """
+    if not name:
+        return redirect(url_for('articles.show_all'))
     tag = Tag.query.filter_by(name=name).first()
     return redirect(url_for('articles.show_all') + '?t=' + str(tag.id))
 
@@ -133,6 +138,8 @@ def show_author(netid):
     """
     Show all posts by a certain author. NetID is unique.
     """
+    if not netid or netid is None:
+        return redirect(url_for('articles.show_all'))
     author = User.query.filter_by(netid=netid).first()
     return redirect(url_for('articles.show_all') + '?a=' + str(author.id))
 

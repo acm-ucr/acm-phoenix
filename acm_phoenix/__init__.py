@@ -102,7 +102,8 @@ def register_filters(app):
         else:
             ids = []
             for cat_id in cat_ids.split(','):
-                ids.append(Category.id == int(cat_id))
+                if cat_id:
+                    ids.append(Category.id == int(cat_id))
             cats = Category.query.filter(or_(*ids)).all()
             if cats is None:
                 return ''
@@ -134,7 +135,7 @@ def register_filters(app):
         if order is None:
             return ''
         else:
-            return 'Ordered by ' + ORDER[order]
+            return 'Ordered by ' + ORDER[str(order)]
 
 if __name__ == '__main__':
     app = create_app('config.Config')
