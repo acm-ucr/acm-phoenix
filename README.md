@@ -41,8 +41,8 @@ Then simply create the test database with:
    
 Then, set up your virtual environment:
 
-    $ pip install virtualenv
-    $ virtualenv venv
+    $ curl -O https://raw.github.com/pypa/virtualenv/master/virtualenv.py
+    $ virtualenv venv --python=python2.7
     $ . venv/bin/activate
 
 This will create a virtual environment for you. Make sure that when you're developing in the future that you do everything from your virtual environment or you won't have the appropriate dependencies.
