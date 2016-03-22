@@ -1,5 +1,5 @@
 [![Build Status](https://secure.travis-ci.org/acm-ucr/acm-phoenix.png)](https://travis-ci.org/acm-ucr/acm-phoenix)
-<img src="http://i.imgur.com/lw40Ynq.png" style="width: 75%; display: block; margin-left: auto; margin-right: auto;" />
+<img src="http://i.imgur.com/lw40Ynq.png" width="680px" height="1215px" />
 ##ACM Phoenix: A rebirth of the original ACM@UCR website
 Hi there, welcome to the official repository for the [ACM@UCR](http://acm.cs.ucr.edu). This is where you can go to contribute to the website in whichever way you want. We'd love to have your stylistic and code additions to the site.
 
