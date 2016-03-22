@@ -1,6 +1,6 @@
 """Defines the Registration and Profile Edit forms for users."""
 
-from flask.ext.wtf import Form
+from flask_wtf import Form
 from wtforms import TextField, IntegerField, SelectField, TextAreaField, SubmitField
 from wtforms.validators import Required, Email, EqualTo, Optional
 

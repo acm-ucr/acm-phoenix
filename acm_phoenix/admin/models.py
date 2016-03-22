@@ -1,12 +1,12 @@
 """Models used for the Administration Panel"""
 
 from flask import render_template, send_file, redirect, url_for
-from flask.ext.login import current_user
-from flask.ext.admin.contrib.sqla import ModelView
-from flask.ext.admin import expose
-from flask.ext.admin.base import AdminIndexView
-from flask.ext.admin.actions import action
-from flask.ext.admin.babel import gettext, lazy_gettext
+from flask_login import current_user
+from flask_admin.contrib.sqla import ModelView
+from flask_admin import expose
+from flask_admin.base import AdminIndexView
+from flask_admin.actions import action
+from flask_admin.babel import gettext, lazy_gettext
 
 from acm_phoenix.users.models import User
 from acm_phoenix.users import constants as USER

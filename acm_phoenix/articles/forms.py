@@ -1,6 +1,6 @@
 """Forms that will be used with the Articles models"""
                            
-from flask.ext.wtf import Form
+from flask_wtf import Form
 from wtforms import TextField, SelectField
 from wtforms.validators import Optional, Required
 from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField

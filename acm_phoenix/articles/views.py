@@ -1,6 +1,6 @@
 from flask import (Blueprint, request, render_template, flash, g, session,
                    redirect, url_for, current_app)
-from flask.ext.paginate import Pagination
+from flask_paginate import Pagination
 from sqlalchemy import or_, and_, text
 
 from acm_phoenix.extensions import db

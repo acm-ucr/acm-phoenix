@@ -1,5 +1,5 @@
-from flask.ext.wtf import Form
-from flask.ext.testing import TestCase, Twill
+from flask_wtf import Form
+from flask_testing import TestCase, Twill
 from wtforms.validators import Optional, Required, Email
 from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField
 from sqlalchemy import text

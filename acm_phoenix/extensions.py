@@ -1,11 +1,11 @@
 # Global database instance.
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 # Global admin instance.
-from flask.ext.admin import Admin
+from flask_admin import Admin
 admin = Admin()
 
 # Global login manager.
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 login_manager = LoginManager()

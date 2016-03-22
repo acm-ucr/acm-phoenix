@@ -1,7 +1,7 @@
 from flask import (Blueprint, render_template, session, url_for, redirect,
                    request)
-from flask.ext.login import login_required, logout_user
-from flask.ext.paginate import Pagination
+from flask_login import login_required, logout_user
+from flask_paginate import Pagination
 
 from time import strftime
 

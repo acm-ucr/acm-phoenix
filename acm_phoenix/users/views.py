@@ -1,7 +1,7 @@
 """Views for the users module"""
 from flask import (Blueprint, request, render_template, flash, session,
                    redirect, url_for, current_app, abort)
-from flask.ext.login import login_required, login_user, current_user
+from flask_login import login_required, login_user, current_user
 
 # WePay transaction
 from wepay import WePay
