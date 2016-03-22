@@ -2,7 +2,7 @@ Flask==0.10.1
 Flask-Admin==1.4.0
 Flask-Markdown==0.3
 Flask-SQLAlchemy==2.1
-pymysql
+Flask-MySQLdb
 Flask-WTF==0.12
 Flask-Gravatar==0.4.2
 Flask-Paginate
