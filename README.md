@@ -15,15 +15,15 @@ We try our best to conform to good coding standards in HTML5/CSS, Javascript, an
 Personally, I suggest you freshen up on your Python, HTML5/CSS, and Javascript to make sure you can easily read through and understand the code for the most part. The newly founded [webplatform.org](http://www.webplatform.org) will become a good place for HTML5/CSS and Javascript. For Python, I recommend looking through the [Google Python course](http://code.google.com/edu/languages/google-python-class/).
 
 ##Ok, cool. So how do I contribute?
-Well, first off, make sure your [github account is set up](https://help.github.com/articles/set-up-git). Then fork the repository and make a local clone.
+Well, first off, make sure your [github account is set up](https://help.github.com/articles/set-up-git).
 
-###Setting up the environment
-The easiest way to use Python-related projects is to use `pip`. And the easiest way to use `pip` on your personal machine is through [virtualenv](http://pypi.python.org/pypi/virtualenv). 
-
-First, clone the repository to your local machine. I recommend using [ssh keys](https://help.github.com/articles/generating-an-ssh-key/).
+Clone the repository to your local machine. I recommend using [ssh keys](https://help.github.com/articles/generating-an-ssh-key/).
 
     $ git clone git@github.com:acm-ucr/acm-phoenix.git
     $ cd acm-phoenix
+
+###Setting up the environment
+The easiest way to use Python-related projects is to use `pip`. And the easiest way to use `pip` on your personal machine is through [virtualenv](http://pypi.python.org/pypi/virtualenv). 
 
 ACM-Phoenix uses a MySQL database that is normally hosted externally, but for development purposes you will be using a local instance.
 
@@ -37,7 +37,7 @@ If you are on a Windows machine, go [here](http://apple.com/shop) or [here](http
 Then simply create the test database with:
 
     $ mysql -uroot
-    $ CREATE DATABASE phoenix
+    $ CREATE DATABASE phoenix;
    
 Then, set up your virtual environment:
 
