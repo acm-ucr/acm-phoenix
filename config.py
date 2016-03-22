@@ -39,7 +39,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SECRET_KEY = SECRET_KEY_VAR
     
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:@localhost/phoenix"
+    SQLALCHEMY_DATABASE_URI = "mysql://root:@localhost/phoenix?charset=utf8mb4"
 
     CSRF_SESSION_KEY = CSRF_SESSION_KEY_VAR
     RECAPTCHA_PUBLIC_KEY = RECAPTCHA_PUBLIC_KEY_VAR
