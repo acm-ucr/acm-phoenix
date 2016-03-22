@@ -24,7 +24,21 @@ First, clone the repository to your local machine. I recommend using [ssh keys](
 
     $ git clone git@github.com:acm-ucr/acm-phoenix.git
     $ cd acm-phoenix
-    
+
+ACM-Phoenix uses a MySQL database that is normally hosted externally, but for development purposes you will be using a local instance.
+
+First, install MySQL. If you are on a Mac with Homebrew:
+
+    $ brew install mysql
+
+If you are on a Linux machine, see [here](https://dev.mysql.com/doc/refman/5.1/en/linux-installation-native.html).
+If you are on a Windows machine, go [here](http://apple.com/shop) or [here](http://www.ubuntu.com/download/desktop).
+
+Then simply create the test database with:
+
+    $ mysql -uroot
+    $ CREATE DATABASE phoenix
+   
 Then, set up your virtual environment:
 
     $ pip install virtualenv
@@ -37,7 +51,7 @@ Once you're in your virtual environment, navigate to the acm-phoenix directory a
 
     (venv)$ ./configure
 
-This will install all necessary dependencies for the website and also create the database from SQL-Alchemy's schema.
+This will install all necessary dependencies for the website and also create the appropriate tables in your local MySQL instance.
 
 To get the website running on localhost, you can now simply run:
 

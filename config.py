@@ -38,6 +38,8 @@ class Config(object):
 class DevelopmentConfig(Config):
     DEBUG = True
     SECRET_KEY = SECRET_KEY_VAR
+    
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:@localhost/phoenix"
 
     CSRF_SESSION_KEY = CSRF_SESSION_KEY_VAR
     RECAPTCHA_PUBLIC_KEY = RECAPTCHA_PUBLIC_KEY_VAR
