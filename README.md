@@ -1,5 +1,9 @@
 [![Build Status](https://secure.travis-ci.org/acm-ucr/acm-phoenix.png)](https://travis-ci.org/acm-ucr/acm-phoenix)
-[![codebeat badge](https://codebeat.co/badges/1b0e5678-68ad-4546-9000-928c4409dab1)](https://codebeat.co/projects/github-com-acm-ucr-acm-phoenix)<br>
+[![codebeat badge](https://codebeat.co/badges/1b0e5678-68ad-4546-9000-928c4409dab1)](https://codebeat.co/projects/github-com-acm-ucr-acm-phoenix)
+[![Code Climate](https://codeclimate.com/github/acm-ucr/acm-phoenix/badges/gpa.svg)](https://codeclimate.com/github/acm-ucr/acm-phoenix)
+[![Test Coverage](https://codeclimate.com/github/acm-ucr/acm-phoenix/badges/coverage.svg)](https://codeclimate.com/github/acm-ucr/acm-phoenix/coverage)
+[![Issue Count](https://codeclimate.com/github/acm-ucr/acm-phoenix/badges/issue_count.svg)](https://codeclimate.com/github/acm-ucr/acm-phoenix)
+<br>
 <p align="center">
     <img src="http://i.imgur.com/IZnGMjc.png" height="400px" />
 </p>
