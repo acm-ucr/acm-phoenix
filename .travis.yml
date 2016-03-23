@@ -3,9 +3,10 @@ python:
   - 2.7
 env:
   - FLASK=0.10.1
+  - DB=mysql
 services: mysql
 before_script:
-  - mysql -e 'CREATE DATABASE phoenix;'
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS phoenix;" -uroot; fi
 install:
   - pip install -q Flask==$FLASK --use-mirrors
   - ./configure
