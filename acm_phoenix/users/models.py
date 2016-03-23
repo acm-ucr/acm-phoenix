@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
     """
     Defines the User object.
     """
-    __tablename__ = 'users_user'
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     netid = db.Column(db.String(30), unique=True)
@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
     wepay_verification = db.Column(db.String(255))
     wepay_checkout_id = db.Column(db.Integer)
     signature = db.Column(db.LargeBinary)
+    attendance = db.Column(db.Integer)
 
     def __init__(self, name=None, netid=None, email=None, standing=None,
                  major=None, shirt_size=None, description=None,

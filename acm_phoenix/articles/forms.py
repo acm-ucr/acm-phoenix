@@ -42,5 +42,5 @@ class SearchForm(Form):
                            choices=[('created%20DESC', 'Recency'),
                                     ('title', 'Title'),
                                     ('articles_category.slug', 'Category Name'),
-                                    ('users_user.name', 'Author Name')]
+                                    ('users.name', 'Author Name')]
                            )

@@ -111,7 +111,7 @@ class ArticlesFormsTest(ACMFormTest):
         order_by_choices = [('created%20DESC', 'Recency'),
                             ('title', 'Title'),
                             ('articles_category.slug', 'Category Name'),
-                            ('users_user.name', 'Author Name')]
+                            ('users.name', 'Author Name')]
 
         form = SearchForm()
         self.assertChoices(form, 'order_by', order_by_choices)

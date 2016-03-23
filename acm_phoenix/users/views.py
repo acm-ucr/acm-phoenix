@@ -30,44 +30,44 @@ mod = Blueprint('users', __name__, url_prefix='')
 @mod.route('/profile/')
 @login_required
 def home():
-  """
-  Display User profile
-  """
-  return render_template('users/profile.html', user=current_user)
+    """
+    Display User profile
+    """
+    return render_template('users/profile.html', user=current_user)
 
 @mod.route('/profile/edit/', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-  """
-  Allow User to edit their profile info
-  """
-  form = EditForm(request.form)
-  if form.validate_on_submit():
-    # Checking if someone is trying to change their email to another user's.
-    otherUser = User.query.filter_by(netid=form.netid.data,
+    """
+    Allow User to edit their profile info
+    """
+    form = EditForm(request.form)
+    if form.validate_on_submit():
+        # Checking if someone is trying to change their email to another user's.
+        otherUser = User.query.filter_by(netid=form.netid.data,
                                      email=form.email.data).first()
 
-    # The user with the new netid and email either shouldn't exist or
-    # should be the current user.
-    if otherUser is not None and current_user != otherUser:
-      flash(u'You seem to be trying to change your netid/email'
-            ' to someone else\'s', 'error')
-      return redirect(url_for('users.home'))
+        # The user with the new netid and email either shouldn't exist or
+        # should be the current user.
+        if otherUser is not None and current_user != otherUser:
+            flash(u'You seem to be trying to change your netid/email'
+                ' to someone else\'s', 'error')
+            return redirect(url_for('users.home'))
 
-    current_user.name = form.name.data
-    current_user.netid = form.netid.data
-    current_user.email = form.email.data
-    current_user.standing = form.standing.data
-    current_user.major = form.major.data
-    current_user.shirt_size = form.shirt_size.data
-    current_user.description = gfm(form.description.data)
+        current_user.name = form.name.data
+        current_user.netid = form.netid.data
+        current_user.email = form.email.data
+        current_user.standing = form.standing.data
+        current_user.major = form.major.data
+        current_user.shirt_size = form.shirt_size.data
+        current_user.description = gfm(form.description.data)
     
-    db.session.add(current_user)
-    db.session.commit()
-    return redirect(url_for('users.home'))
-  return render_template('users/edit.html', user=current_user, form=form)
+        db.session.add(current_user)
+        db.session.commit()
+        return redirect(url_for('users.home'))
+    return render_template('users/edit.html', user=current_user, form=form)
 
-@mod.route('/login/')
+@mod.route('/login')
 @oauth_flow
 def login(flow):
   """
@@ -116,7 +116,7 @@ def wepay_membership_response(user):
 
   return response
 
-@mod.route('/register/', methods=['GET', 'POST'])
+@mod.route('/register', methods=['GET', 'POST'])
 def register():
   """
   Registration Form
@@ -199,7 +199,7 @@ def verify_membership_payment(verification_key):
 
   return redirect(url_for('users.home'))
   
-@mod.route('/paymembership/')
+@mod.route('/paymembership')
 @login_required
 def payment_redirect():
   """
@@ -212,7 +212,7 @@ def payment_redirect():
   db.session.commit()
   return redirect(response['checkout_uri'])
 
-@mod.route('/oauth2callback/')
+@mod.route('/authenticate')
 @oauth_flow
 def authenticate_user(flow):
   """
@@ -261,7 +261,7 @@ def verify_credentials_and_login(credentials):
     flash(u'Sorry, we couldn\'t verify your email', 'error')
     return redirect(url_for('index.show_home'))
 
-@mod.route('/user/view/<user_netid>/')
+@mod.route('/user/view/<user_netid>')
 @login_required
 def view_profile(user_netid):
   """
