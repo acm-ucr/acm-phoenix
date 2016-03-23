@@ -1,4 +1,5 @@
-[![Build Status](https://secure.travis-ci.org/acm-ucr/acm-phoenix.png)](https://travis-ci.org/acm-ucr/acm-phoenix)<br>
+[![Build Status](https://secure.travis-ci.org/acm-ucr/acm-phoenix.png)](https://travis-ci.org/acm-ucr/acm-phoenix)
+[![codebeat badge](https://codebeat.co/badges/1b0e5678-68ad-4546-9000-928c4409dab1)](https://codebeat.co/projects/github-com-acm-ucr-acm-phoenix)<br>
 <p align="center">
     <img src="http://i.imgur.com/IZnGMjc.png" height="400px" />
 </p>
