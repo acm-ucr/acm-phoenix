@@ -33,6 +33,7 @@ config.py
 
 #Config Variables
 secrets.py
+client_secrets.json
 
 #OS X files
 .DS_Store
