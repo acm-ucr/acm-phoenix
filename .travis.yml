@@ -8,3 +8,6 @@ install:
   - ./configure
 script:
   - nosetests --verbosity=3 -x .
+addons:
+    code_climate:
+        repo_token: d291ccff6d822a69ac1e2b594bdf7dede9144c2ff9b9fb03bc953255f5ac4b74
