@@ -103,6 +103,8 @@ body {
 
 #banner {
     padding-top: 15px;
+    text-align: center;
+    height: 20vh;
 }
 
 #bannerLink {
@@ -148,6 +150,7 @@ body {
 #headerNav {
     padding-top: 15px;
     margin-top: 30px;
+    height: 20vh;
 }
 
 #footerContent a,
@@ -181,11 +184,18 @@ body {
     height: 70px;
 }
 
+#acmLogoImg {
+  display: inline-block;
+  margin: 1em;
+  height: 20vh;
+  width: auto;
+}
+
 #logoImg {
-    width: 30vh;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    display: inline-block;
+    margin: 1em;
+    height: 20vh;
+    width: auto;
 }
 
 #minimalHeader {
