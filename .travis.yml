@@ -3,8 +3,9 @@ python:
   - 2.7
 env:
   - FLASK=0.10.1
-services:
-  - mysql
+services: mysql
+before_script:
+  - mysql -e 'CREATE DATABASE phoenix;'
 install:
   - pip install -q Flask==$FLASK --use-mirrors
   - ./configure
