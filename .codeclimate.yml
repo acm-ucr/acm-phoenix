@@ -1,0 +1,25 @@
+engines:
+  csslint:
+      enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python
+      - javascript
+  eslint:
+    enabled: true
+  markdownlint:
+    enabled: true
+  pep8:
+      enabled: true
+ratings:
+  paths:
+  - acm_phoenix/**
+  - "**.js"
+  - "**.css"
+  - "**.py"
+exclude_paths:
+- spec/**/*
+- "**/vendor/**/*"
+- venv/**/*
