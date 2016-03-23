@@ -73,7 +73,7 @@ class Post(db.Model):
                                primaryjoin=(category_id == Category.id),
                                backref=db.backref('cats', lazy='dynamic'),
                                order_by=Category.slug)
-    author_id = db.Column(db.Integer, db.ForeignKey('users_user.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     author = db.relationship('User', primaryjoin=(author_id == User.id),
                              backref=db.backref('posters', lazy='dynamic'),
                              order_by=User.name)

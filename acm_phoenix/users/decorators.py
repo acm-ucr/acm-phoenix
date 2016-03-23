@@ -9,9 +9,9 @@ def oauth_flow(f):
   @wraps(f)
   def decorated_function(*args, **kwargs):
     flow = OAuth2WebServerFlow(
-      client_id=current_app.config['GOOGLE_CLIENT_ID'],
-      client_secret=current_app.config['GOOGLE_CLIENT_SECRET'],
-      scope='https://www.googleapis.com/auth/userinfo.email',
-      redirect_uri=current_app.config['HOST_URL'] + '/oauth2callback')
+      client_id = current_app.config['GOOGLE_CLIENT_ID'],
+      client_secret = current_app.config['GOOGLE_CLIENT_SECRET'],
+      scope = 'https://www.googleapis.com/auth/userinfo.email',
+      redirect_uri = current_app.config['HOST_URL'] + '/authenticate')
     return f(flow, *args, **kwargs)
   return decorated_function
