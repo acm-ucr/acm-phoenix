@@ -22,6 +22,7 @@ import zipfile
 
 from time import strftime
 
+
 class AdminView(AdminIndexView):
     """
     A subclass of the AdminIndexView that forces user authentication.
@@ -38,26 +39,26 @@ class AdminView(AdminIndexView):
 
 class UserAdmin(ModelView):
     """
-    A modification on ModelView that removes extraneous columns like 
+    A modification on ModelView that removes extraneous columns like
     Description, WePay Verification Key, and Signature
     """
     column_exclude_list = ['description', 'wepay_verification',
-                             'signature', 'wepay_checkout_id']
+                           'signature', 'wepay_checkout_id']
 
     # Only text based columns are searchable anyways.
     column_searchable_list = (User.name, User.email, User.netid, User.standing,
-                          User.major)
+                              User.major)
 
     column_formatters = dict(
         role=lambda m, p: USER.ROLE[m.role].title(),
-        membership_status=(lambda m,p: 
+        membership_status=(lambda m, p:
                            USER.MEMBER_STATUS[m.membership_status].title()),
         member_since=(lambda m, p: m.member_since.strftime("%b %d, %Y")
                       if m.member_since is not None
                       else "Not a member"),
-        membership_paid_on=(lambda m, p: 
-                            m.membership_paid_on.strftime("%b %d, %Y") 
-                            if m.membership_paid_on is not None 
+        membership_paid_on=(lambda m, p:
+                            m.membership_paid_on.strftime("%b %d, %Y")
+                            if m.membership_paid_on is not None
                             else "Not Paid"),
         standing=lambda m, p: m.standing.title())
 
@@ -66,13 +67,14 @@ class UserAdmin(ModelView):
 
     form_overrides = dict(role=SelectField, membership_status=SelectField)
     form_args = dict(
-        role = dict(choices=[(2, 'Member'),
-                             (1, 'Publisher'),
-                             (0, 'Administrator')], coerce=int
-                    ),
-        membership_status = dict(choices=[(0, 'Unregistered'),
-                                          (1, 'In Progress (Unpaid)'),
-                                          (2, 'Official (Paid)')], coerce=int))
+        role=dict(choices=[(2, 'Member'),
+                           (1, 'Publisher'),
+                           (0, 'Administrator')], coerce=int
+                  ),
+        membership_status=dict(choices=[(0, 'Unregistered'),
+                                        (1, 'In Progress (Unpaid)'),
+                                        (2, 'Official (Paid)')], coerce=int)
+                               )
 
     def is_accessible(self):
         """
@@ -83,9 +85,10 @@ class UserAdmin(ModelView):
 
     def __init__(self, session, **kwargs):
         # Just call parent class with predefined model.
-        super(UserAdmin, self).__init__(User, session, name="user", 
+        super(UserAdmin, self).__init__(User, session, name="user",
                                         endpoint="usertools", url='usertools',
                                         **kwargs)
+
 
 class PostAdmin(ModelView):
     """
@@ -94,14 +97,15 @@ class PostAdmin(ModelView):
     column_exclude_list = ['gfm_content']
 
     column_sortable_list = (('category', Category.slug),
-                        ('author', User.name), 'title', 'created', 'slug')
+                            ('author', User.name), 'title', 'created', 'slug')
 
     column_searchable_list = (User.name,)
 
-    column_formatters = dict(category=lambda m, p: m.category.slug,
-                           author=lambda m, p: m.author.name,
-                           created=lambda m, p: m.created.strftime("%b %d, %Y"),
-                           slug=lambda m, p: m.slug.lower())
+    column_formatters = \
+        dict(category=lambda m, p: m.category.slug,
+             author=lambda m, p: m.author.name,
+             created=lambda m, p: m.created.strftime("%b %d, %Y"),
+             slug=lambda m, p: m.slug.lower())
 
     form_overrides = dict(gfm_content=TextAreaField)
     form_excluded_columns = ('created')
@@ -112,12 +116,13 @@ class PostAdmin(ModelView):
     def __init__(self, session, **kwargs):
         super(PostAdmin, self).__init__(Post, session, name="posts",
                                         endpoint="publish", url='/publish',
-                                        **kwargs)   
+                                        **kwargs)
 
     def is_accessible(self):
         """Override of default ModelView is_accessible."""
         # Only accessible to those with a publisher role.
         return current_user.is_authenticated and current_user.isPublisher()
+
 
 class CategoryAdmin(ModelView):
     """
@@ -134,6 +139,7 @@ class CategoryAdmin(ModelView):
         """Override of default ModelView is_accessible."""
         # Only accessible to those with a publisher role.
         return current_user.is_authenticated and current_user.isPublisher()
+
 
 class TagAdmin(ModelView):
     """
@@ -158,9 +164,9 @@ class ReportAdmin(ModelView):
     generating paper copies of membership information.
     """
     column_exclude_list = ['description', 'wepay_verification', 'signature',
-                             'role', 'membership_status', 'wepay_checkout_id']
+                           'role', 'membership_status', 'wepay_checkout_id']
     column_searchable_list = (User.name, User.email, User.netid, User.standing,
-                          User.major)
+                              User.major)
 
     # This view is for reports only so nothing is editable or creatable.
     can_create = False
@@ -172,12 +178,12 @@ class ReportAdmin(ModelView):
 
     column_formatters = dict(
         role=lambda m, p: USER.ROLE[m.role].title(),
-        membership_status=(lambda m, p: 
+        membership_status=(lambda m, p:
                            USER.MEMBER_STATUS[m.membership_status].title()),
         member_since=(lambda m, p: m.member_since.strftime("%b %d, %Y")
                       if m.member_since is not None
                       else "Not currently a member"),
-        membership_paid_on=(lambda m, p: 
+        membership_paid_on=(lambda m, p:
                             m.membership_paid_on.strftime("%b %d, %Y")
                             if m.membership_paid_on is not None
                             else "Not Paid"),
@@ -203,10 +209,11 @@ class ReportAdmin(ModelView):
         for user_id in users:
             user = User.query.get(user_id)
 
-            # For each user, render the membership form template with 
+            # For each user, render the membership form template with
             # user-specific data
-            html = render_template("admin/report/membership_form_template.html",
-                                   user=user)
+            html = \
+                render_template("admin/report/membership_form_template.html",
+                                user=user)
             result = StringIO.StringIO()
 
             # Convert rendered xhtml into pdf file for specific user
@@ -225,4 +232,3 @@ class ReportAdmin(ModelView):
         response = send_file(zipdata, "application/zip", True,
                              "membership_forms.zip")
         return response
-
