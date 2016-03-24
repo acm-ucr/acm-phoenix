@@ -1,8 +1,10 @@
 """Defines the Registration and Profile Edit forms for users."""
 
 from flask_wtf import Form
-from wtforms import TextField, IntegerField, SelectField, TextAreaField, SubmitField
+from wtforms import (TextField, IntegerField, SelectField,
+                     TextAreaField, SubmitField)
 from wtforms.validators import Required, Email, EqualTo, Optional
+
 
 class RegisterForm(Form):
     """
@@ -49,6 +51,7 @@ class RegisterForm(Form):
     reg_and_pay = SubmitField(u'<i class="icon-credit-card"></i> '
                               'Register and Pay Membership')
 
+
 class EditForm(Form):
     """
     Form used to edit user profile information.
@@ -90,4 +93,3 @@ class EditForm(Form):
     description = TextAreaField(u'Describe yourself! '
                                 '(Github Flavored Markdown Allowed!)',
                                 [Optional()])
-    

@@ -62,11 +62,12 @@ def gfm(text):
         # don't mess with URLs:
         if 'http:' in s or 'https:' in s:
             return s
-        
+
         return s.replace('_', '\_')
 
     # fix italics for code blocks
-    pattern = re.compile(r'^(?! {4}|\t).*\w+(?<!_)_\w+_\w[\w_]*', re.MULTILINE | re.UNICODE)
+    pattern = re.compile(r'^(?! {4}|\t).*\w+(?<!_)_\w+_\w[\w_]*',
+                         re.MULTILINE | re.UNICODE)
     text = re.sub(pattern, italic_callback, text)
 
     # linkify naked URLs
@@ -76,7 +77,7 @@ def gfm(text):
 (\s|$) # trailing whitespace or end of string
 """
     pattern = re.compile(regex_string, re.VERBOSE | re.MULTILINE | re.UNICODE)
-    
+
     # wrap the URL in brackets: http://foo -> [http://foo](http://foo)
     text = re.sub(pattern, r'\1[\2](\2)\3', text)
 
@@ -104,12 +105,14 @@ except ImportError:
     def assert_equal(a, b):
         assert a == b, '%r != %r' % (a, b)
 
+
 def test_single_underscores():
     """Don't touch single underscores inside words."""
     assert_equal(
         gfm('foo_bar'),
         'foo_bar',
     )
+
 
 def test_underscores_code_blocks():
     """Don't touch underscores in code blocks."""
@@ -118,6 +121,7 @@ def test_underscores_code_blocks():
         '    foo_bar_baz',
     )
 
+
 def test_underscores_inline_code_blocks():
     """Don't touch underscores in code blocks."""
     assert_equal(
@@ -125,12 +129,14 @@ def test_underscores_inline_code_blocks():
         'foo `foo_bar_baz`',
     )
 
+
 def test_underscores_pre_blocks():
     """Don't touch underscores in pre blocks."""
     assert_equal(
         gfm('<pre>\nfoo_bar_baz\n</pre>'),
         '<pre>\nfoo_bar_baz\n</pre>',
     )
+
 
 def test_pre_block_pre_text():
     """Don't treat pre blocks with pre-text differently."""
@@ -140,6 +146,7 @@ def test_pre_block_pre_text():
         gfm(a)[2:],
         gfm(b)[3:],
     )
+
 
 def test_two_underscores():
     """Escape two or more underscores inside words."""
@@ -152,12 +159,14 @@ def test_two_underscores():
         'something else then foo\\_bar\\_baz',
     )
 
+
 def test_newlines_simple():
     """Turn newlines into br tags in simple cases."""
     assert_equal(
         gfm('foo\nbar'),
         'foo  \nbar',
     )
+
 
 def test_newlines_group():
     """Convert newlines in all groups."""
@@ -166,12 +175,14 @@ def test_newlines_group():
         'apple  \npear  \norange\n\nruby  \npython  \nerlang',
     )
 
+
 def test_newlines_long_group():
     """Convert newlines in even long groups."""
     assert_equal(
         gfm('apple\npear\norange\nbanana\n\nruby\npython\nerlang'),
         'apple  \npear  \norange  \nbanana\n\nruby  \npython  \nerlang',
     )
+
 
 def test_newlines_list():
     """Don't convert newlines in lists."""
@@ -184,6 +195,7 @@ def test_newlines_list():
         '* foo\n* bar',
     )
 
+
 def test_underscores_urls():
     """Don't replace underscores in URLs"""
     assert_equal(
@@ -191,16 +203,19 @@ def test_underscores_urls():
         '[foo](http://example.com/a_b_c)'
         )
 
+
 def test_underscores_in_html():
     """Don't replace underscores in HTML blocks"""
     assert_equal(
         gfm('<img src="http://example.com/a_b_c" />'),
         '<img src="http://example.com/a_b_c" />'
         )
-    
+
+
 def test_linkify_naked_urls():
     """Wrap naked URLs in []() so they become clickable links."""
     assert_equal(
         gfm(" http://www.example.com:80/foo?bar=bar&biz=biz"),
-        " [http://www.example.com:80/foo?bar=bar&biz=biz](http://www.example.com:80/foo?bar=bar&biz=biz)"
+        " [http://www.example.com:80/foo?bar=bar&biz=biz] \
+          (http://www.example.com:80/foo?bar=bar&biz=biz)"
         )
