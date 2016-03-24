@@ -1,6 +1,7 @@
 from flask import Flask
 from acm_phoenix.extensions import db, admin
 
+
 def create_app(config_object, debug=False):
     """Creates a valid acm_phoenix application."""
     app = Flask(__name__)
@@ -12,18 +13,20 @@ def create_app(config_object, debug=False):
 
     return app
 
+
 def register_blueprints(app):
     """Registers submodules as blueprints."""
     from acm_phoenix.views import mod as indexModule
     from acm_phoenix.users.views import mod as usersModule
     from acm_phoenix.articles.views import mod as articlesModule
     from acm_phoenix.snippets.views import mod as snippetsModule
-    
+
     app.register_blueprint(indexModule)
     app.register_blueprint(usersModule)
     app.register_blueprint(articlesModule)
     app.register_blueprint(snippetsModule)
     register_admin_backend(app)
+
 
 def register_admin_backend(app):
     from flask.ext.admin import Admin
@@ -39,6 +42,7 @@ def register_admin_backend(app):
     admin.add_view(TagAdmin(db.session))
     admin.init_app(app)
 
+
 def register_login_manager(app):
     from acm_phoenix.extensions import login_manager
     from acm_phoenix.users.models import User
@@ -51,6 +55,7 @@ def register_login_manager(app):
     def load_user(user_id):
         return User.query.get(user_id)
     login_manager.setup_app(app)
+
 
 def register_filters(app):
     """Initializes all filters needed for submodules."""
@@ -65,6 +70,7 @@ def register_filters(app):
         """A filter that formats a datetime as Month Day, Year."""
         format = '%b %d, %Y'
         return date.strftime(format)
+
     @app.template_filter('format_authors')
     def authors(author_ids):
         """Convert list of author ids into author names."""
@@ -81,8 +87,7 @@ def register_filters(app):
                 return ''
             else:
                 return 'by ' + ', '.join([author.name for author in authors])
-                
-                
+
     @app.template_filter('format_query')
     def formatted_query(query):
         """Pretty print query."""
@@ -125,7 +130,7 @@ def register_filters(app):
             if tags is None:
                 return ''
             else:
-                return ('with tags: ' + 
+                return ('with tags: ' +
                         ', '.join([tag.name.title() for tag in tags]))
 
     @app.template_filter('format_order')
@@ -136,6 +141,7 @@ def register_filters(app):
             return ''
         else:
             return 'Ordered by ' + ORDER[str(order)]
+
 
 if __name__ == '__main__':
     app = create_app('config.Config')
