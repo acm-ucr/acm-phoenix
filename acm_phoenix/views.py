@@ -10,9 +10,11 @@ from sqlalchemy import text
 
 mod = Blueprint('index', __name__, url_prefix='')
 
+
 @mod.errorhandler(404)
 def not_found(error):
     return render_template('404.html', error=error), 404
+
 
 @mod.route('/')
 def show_home():
@@ -22,7 +24,7 @@ def show_home():
     from acm_phoenix.articles.forms import SearchForm
     from acm_phoenix.articles.models import Category, Post, Tag
     form = SearchForm()
-    
+
     frontpage_filter = Post.query.filter(Tag.name == "frontpage")
     posts = frontpage_filter.order_by(text("created DESC")).all()
 
@@ -36,9 +38,10 @@ def show_home():
     pagination = Pagination(posts, per_page=4, total=len(posts),
                             page=page, link_size='large')
 
-    return render_template('home.html', posts=posts, form=form, 
+    return render_template('home.html', posts=posts, form=form,
                            pagination=pagination, tags=tags, cats=cats,
                            authors=authors)
+
 
 @mod.route('/logout')
 @login_required
