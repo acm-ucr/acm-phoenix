@@ -5,6 +5,7 @@ from acm_phoenix.extensions import db
 from acm_phoenix.users import constants as USER
 from datetime import datetime
 
+
 class User(db.Model, UserMixin):
     """
     Defines the User object.
@@ -56,7 +57,7 @@ class User(db.Model, UserMixin):
         """
         return USER.MEMBER_STATUS[self.membership_status]
 
-    def __repr__ (self):
+    def __repr__(self):
         """
         Represent User as Name (email)
         """
