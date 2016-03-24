@@ -15,11 +15,13 @@ from acm_phoenix.users.gfm import gfm
 # Article Blueprint
 mod = Blueprint('articles', __name__, url_prefix='/articles')
 
+
 def valid_args(args):
     """
     Checks request args to see if they are valid. I.E., they contain a value.
     """
     return args is not None and len(args) > 0
+
 
 def ilist_to_string(ilist):
     """
@@ -27,6 +29,7 @@ def ilist_to_string(ilist):
     for searching.
     """
     return ','.join([str(i.id) for i in ilist])
+
 
 # Routing rules
 @mod.route('/', methods=['GET', 'POST'])
@@ -49,13 +52,12 @@ def show_all():
         # Otherwise, get posts that fit requests
         search_term = "%" + (request.args.get('q') or "") + "%"
 
-
         categories = []
         req_cat = request.args.get('c')
         category_list = (req_cat.split(',')
-                         if req_cat is not None 
+                         if req_cat is not None
                          else ([cat.id for cat in Category.query.all()]))
-        
+
         for category in category_list:
             categories.append(Post.category_id == category)
 
@@ -83,7 +85,7 @@ def show_all():
         """
         To be clear, this query looks for anything like the search term
         inside of the title or content of all posts and narrows it down
-        to the selected authors, the selected categories, and the selected tags.
+        to the selected authors, the selected categories, and the selected tags
         """
         posts = Post.query.join(Category).join(User).filter(
             or_(Post.title.like(search_term),
@@ -112,6 +114,7 @@ def show_all():
                            authors=req_auth, tags=req_tags, order=order,
                            pagination=pagination)
 
+
 @mod.route('/cat/<slug>/')
 def show_cat(slug):
     """
@@ -123,6 +126,7 @@ def show_cat(slug):
     else:
         return redirect(url_for('articles.show_all') + '?c=' + str(cat.id))
 
+
 @mod.route('/tag/<name>/')
 def show_tag(name):
     """
@@ -133,6 +137,7 @@ def show_tag(name):
     tag = Tag.query.filter_by(name=name).first()
     return redirect(url_for('articles.show_all') + '?t=' + str(tag.id))
 
+
 @mod.route('/author/<netid>/')
 def show_author(netid):
     """
@@ -142,6 +147,7 @@ def show_author(netid):
         return redirect(url_for('articles.show_all'))
     author = User.query.filter_by(netid=netid).first()
     return redirect(url_for('articles.show_all') + '?a=' + str(author.id))
+
 
 @mod.route('/p/<slug>/')
 def show_post(slug):

@@ -1,5 +1,4 @@
 """Models needed for Article module"""
-
 from flask import flash
 
 from acm_phoenix.extensions import db
@@ -10,12 +9,15 @@ import re
 from datetime import datetime
 
 slug_re = re.compile('[a-zA-Z0-9]+')
+
+
 def slugify(title):
     """
     Change title into shortened slug to be used in urls.
     """
     _title = title[:99].replace(' ', '-')  # Changed slug length to 100
     return '-'.join(re.findall(slug_re, _title))
+
 
 class Category(db.Model):
     """
@@ -35,9 +37,16 @@ class Category(db.Model):
 
 # M2M Relationship between tags and posts
 tags = db.Table('tags',
-    db.Column('tag_id', db.Integer, db.ForeignKey('articles_tag.id')),
-    db.Column('post_id', db.Integer, db.ForeignKey('articles_posts.id'))
-)
+                db.Column('tag_id',
+                          db.Integer,
+                          db.ForeignKey('articles_tag.id')
+                          ),
+                db.Column('post_id',
+                          db.Integer,
+                          db.ForeignKey('articles_posts.id')
+                          )
+                )
+
 
 class Tag(db.Model):
     """
@@ -52,6 +61,7 @@ class Tag(db.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class Post(db.Model):
     """
@@ -69,7 +79,7 @@ class Post(db.Model):
                            backref=db.backref('tags', lazy='dynamic'))
     slug = db.Column(db.Text)
     category_id = db.Column(db.Integer, db.ForeignKey('articles_category.id'))
-    category = db.relationship('Category', 
+    category = db.relationship('Category',
                                primaryjoin=(category_id == Category.id),
                                backref=db.backref('cats', lazy='dynamic'),
                                order_by=Category.slug)
