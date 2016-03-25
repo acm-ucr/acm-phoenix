@@ -72,7 +72,7 @@ def edit_profile():
     return render_template('users/edit.html', user=current_user, form=form)
 
 
-@mod.route('/login')
+@mod.route('/login/')
 @oauth_flow
 def login(flow):
     """
@@ -123,12 +123,13 @@ def wepay_membership_response(user):
     return response
 
 
-@mod.route('/register', methods=['GET', 'POST'])
+@mod.route('/register/', methods=['GET', 'POST'])
 def register():
     """
     Registration Form
     """
     form = RegisterForm(request.form)
+    
     if form.validate_on_submit():
         # If netid and email are unique, create an user instance not yet
         # stored in the database
@@ -144,8 +145,7 @@ def register():
         if raw_signature.find("data:image") == -1:
             from signpad2image import s2i
 
-            image_path = \
-                os.path.join(os.path.dirname(__file__),
+            image_path = os.path.join(os.path.dirname(__file__),
                              '../static/packages/signpad2image/signpad2image/')
             PIL_image = s2i(
                 raw_signature,
@@ -186,6 +186,7 @@ def register():
         else:
             # redirect user to the 'home' method of the user module.
             return redirect(url_for('users.home'))
+    
     return render_template('users/register.html', form=form)
 
 
@@ -210,7 +211,7 @@ def verify_membership_payment(verification_key):
     return redirect(url_for('users.home'))
 
 
-@mod.route('/paymembership')
+@mod.route('/paymembership/')
 @login_required
 def payment_redirect():
     """
@@ -224,7 +225,7 @@ def payment_redirect():
     return redirect(response['checkout_uri'])
 
 
-@mod.route('/authenticate')
+@mod.route('/authenticate/')
 @oauth_flow
 def authenticate_user(flow):
     """
@@ -253,9 +254,9 @@ def verify_credentials_and_login(credentials):
 
     # Extract email and email verification
     email = id_token['email']
-    verified_email = id_token['verified_email']
+    email_verified = id_token['email_verified']
 
-    if verified_email:
+    if email_verified:
         # Find user with this email
         user = User.query.filter_by(email=email).first()
         if user is None:
@@ -275,7 +276,7 @@ def verify_credentials_and_login(credentials):
         return redirect(url_for('index.show_home'))
 
 
-@mod.route('/user/view/<user_netid>')
+@mod.route('/user/view/<user_netid>/')
 @login_required
 def view_profile(user_netid):
     """
