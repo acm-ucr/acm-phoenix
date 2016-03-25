@@ -82,6 +82,15 @@
                                         </li>
                                     </ul>
                                 </li>
+                            {% if current_user.is_authenticated and  current_user.isAdmin() %}
+                            <ul class="nav">
+                                <li>
+                                    <a href="/admin">
+                                        <i class="icon-legal icon-white"></i> Admin
+                                    </a>
+                                </li>
+                            </ul>
+                            {% endif %}
                             </ul>
                             {% endblock %}
                             <ul class="nav">

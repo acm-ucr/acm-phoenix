@@ -50,17 +50,17 @@ class UserAdmin(ModelView):
                               User.major)
 
     column_formatters = dict(
-        role=lambda m, p: USER.ROLE[m.role].title(),
-        membership_status=(lambda m, p:
+        role=lambda v, c, m, p: USER.ROLE[m.role].title(),
+        membership_status=(lambda v, c, m, p:
                            USER.MEMBER_STATUS[m.membership_status].title()),
-        member_since=(lambda m, p: m.member_since.strftime("%b %d, %Y")
+        member_since=(lambda v, c, m, p: m.member_since.strftime("%b %d, %Y")
                       if m.member_since is not None
                       else "Not a member"),
-        membership_paid_on=(lambda m, p:
+        membership_paid_on=(lambda v, c, m, p:
                             m.membership_paid_on.strftime("%b %d, %Y")
                             if m.membership_paid_on is not None
                             else "Not Paid"),
-        standing=lambda m, p: m.standing.title())
+        standing=lambda v, c, m, p: m.standing.title())
 
     # Some impossible page size
     page_size = 1000
@@ -102,10 +102,10 @@ class PostAdmin(ModelView):
     column_searchable_list = (User.name,)
 
     column_formatters = \
-        dict(category=lambda m, p: m.category.slug,
-             author=lambda m, p: m.author.name,
-             created=lambda m, p: m.created.strftime("%b %d, %Y"),
-             slug=lambda m, p: m.slug.lower())
+        dict(category=lambda v, c, m, p: m.category.slug,
+             author=lambda v, c, m, p: m.author.name,
+             created=lambda v, c, m, p: m.created.strftime("%b %d, %Y"),
+             slug=lambda v, c, m, p: m.slug.lower())
 
     form_overrides = dict(gfm_content=TextAreaField)
     form_excluded_columns = ('created')
@@ -177,17 +177,17 @@ class ReportAdmin(ModelView):
     page_size = 1000
 
     column_formatters = dict(
-        role=lambda m, p: USER.ROLE[m.role].title(),
-        membership_status=(lambda m, p:
+        role=lambda v, c, m, p: USER.ROLE[m.role].title(),
+        membership_status=(lambda v, c, m, p:
                            USER.MEMBER_STATUS[m.membership_status].title()),
-        member_since=(lambda m, p: m.member_since.strftime("%b %d, %Y")
+        member_since=(lambda v, c, m, p: m.member_since.strftime("%b %d, %Y")
                       if m.member_since is not None
                       else "Not currently a member"),
-        membership_paid_on=(lambda m, p:
+        membership_paid_on=(lambda v, c, m, p:
                             m.membership_paid_on.strftime("%b %d, %Y")
                             if m.membership_paid_on is not None
                             else "Not Paid"),
-        standing=lambda m, p: m.standing.title())
+        standing=lambda v, c, m, p: m.standing.title())
 
     def is_accessible(self):
         """Override of default ModelView is_accessible."""
