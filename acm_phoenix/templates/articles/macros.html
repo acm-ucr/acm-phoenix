@@ -1,33 +1,33 @@
 {% macro render_posts(posts, pagination) %}
-  {{ pagination.info|safe }}
-  {{ pagination.links|safe }}
-  <div id="posts" class="accordion span11">
-    {% set start_point = ((pagination.page - 1) * pagination.per_page) %}
-    {% for post in posts[start_point:start_point + pagination.per_page] %}
-      <div class="post">
-	<div class="postHeader">
-	  <div>
-            <h2>
-	      <a href="/articles/p/{{ post.slug }}">{{ post.title }}</a>
-	      <br>
-		<small>
-		  <i class="icon-calendar"></i> {{ post.created | formatted_time }} by <a href="/articles/author/{{ post.author.netid }}/">{{ post.author.name }}</a> in <a href="/articles/cat/{{ post.category.slug }}">{{ post.category.slug | title }}</a>
-		  <br>
-		    <h6><i class="icon-tags"></i> {% for tag in post.tags %} <a href="/articles/tag/{{ tag.name }}">#{{ tag.name | title }}</a>&nbsp;{% endfor %}</h6>
-		</small>
-	    </h2>
-	  </div>
-	</div>
-	<div id="post{{ post.id }}">
-	  <div class="accordion-inner">
-            {{ post.gfm_content | markdown }}
-	  </div>
-	</div>
-      </div>
-      <br>
-    {% endfor %}
-      {{ pagination.links|safe }}
-  </div>
+    {{ pagination.info|safe }}
+    {{ pagination.links|safe }}
+    <div id="posts" class="accordion span11">
+        {% set start_point = ((pagination.page - 1) * pagination.per_page) %}
+        {% for post in posts[start_point:start_point + pagination.per_page] %}
+            <div class="post">
+                <div class="postHeader">
+                    <div>
+                        <h2>
+                            <a href="/articles/p/{{ post.slug }}">{{ post.title }}</a>
+                            <br>
+                            <small>
+                                <i class="icon-calendar"></i> {{ post.created | formatted_time }} by <a href="/articles/author/{{ post.author.netid }}/">{{ post.author.name }}</a> in <a href="/articles/cat/{{ post.category.slug }}">{{ post.category.slug | title }}</a>
+                                <br>
+                                <h6><i class="icon-tags"></i> {% for tag in post.tags %} <a href="/articles/tag/{{ tag.name }}">#{{ tag.name | title }}</a>&nbsp;{% endfor %}</h6>
+                            </small>
+                        </h2>
+                    </div>
+                </div>
+                <div id="post{{ post.id }}">
+                    <div class="accordion-inner">
+                        {{ post.gfm_content | markdown }}
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+        {{ pagination.links|safe }}
+    </div>
 {% endmacro %}
 
 {% macro render_search_form(form) %}
