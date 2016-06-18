@@ -37,3 +37,6 @@ client_secrets.json
 
 #OS X files
 .DS_Store
+
+#venv files
+venv/
