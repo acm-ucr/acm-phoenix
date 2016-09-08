@@ -19,3 +19,4 @@ twill
 lxml
 requests
 cssselect
+html5lib==1.0b8
