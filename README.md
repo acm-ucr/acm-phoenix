@@ -13,7 +13,7 @@ Hi there, welcome to the official repository for the [ACM@UCR](http://acm.cs.ucr
 ##Getting Started
 ACM@UCR uses a Python microframework named [Flask](http://flask.pocoo.org/) as a backend for page routing and service. It comes packaged with a templating engine called  [Werkzeug](http://werkzeug.pocoo.org/) that has similar syntax to what you might see in [MustacheJS](http://mustache.github.com/), which allows us to easily modularize our templates.
 
-For the frontend, ACM@UCR takes advantage of modern design frameworks such as [Bootstrap](http://getbootstrap.com/) and [HTML5 Boilerplate](http://html5boilerplate.com/) to attain a crisp, easily-extendable markup and user interface. 
+For the frontend, ACM@UCR takes advantage of modern design frameworks such as [Bootstrap](http://getbootstrap.com/) and [HTML5 Boilerplate](http://html5boilerplate.com/) to attain a crisp, easily-extendable markup and user interface.
 Look, here's an example:
 <img src="http://i.imgur.com/yGYto.png" />
 
@@ -30,7 +30,7 @@ Clone the repository to your local machine. I recommend using [ssh keys](https:/
     $ cd acm-phoenix
 
 ###Setting up the environment
-The easiest way to use Python-related projects is to use `pip`. And the easiest way to use `pip` on your personal machine is through [virtualenv](http://pypi.python.org/pypi/virtualenv). 
+The easiest way to use Python-related projects is to use `pip`. And the easiest way to use `pip` on your personal machine is through [virtualenv](http://pypi.python.org/pypi/virtualenv).
 
 ACM-Phoenix uses a MySQL database that is normally hosted externally, but for development purposes you will be using a local instance.
 
@@ -45,11 +45,11 @@ Then simply create the test database with:
 
     $ mysql -uroot
     $ CREATE DATABASE phoenix;
-   
+
 Then, set up your virtual environment:
 
-    $ curl -O https://raw.github.com/pypa/virtualenv/master/virtualenv.py
-    $ python virtualenv.py venv --python=python2.7
+    $ pip install virtualenv
+    $ virtualenv venv
     $ . venv/bin/activate
 
 This will create a virtual environment for you. Make sure that when you're developing in the future that you do everything from your virtual environment or you won't have the appropriate dependencies.
@@ -64,7 +64,7 @@ To get the website running on localhost, you can now simply run:
 
     $ python run.py
 
-If all went well, you should see: 
+If all went well, you should see:
 
      * Running on http://127.0.0.1:5000/
      * Restarting with reloader
